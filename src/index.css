@@ -5,6 +5,21 @@
 
   color: rgba(255, 255, 255, 0.9);
   background-color: #0f1014;
+  --bg-1: #2a2d32;
+  --bg-2: #46505c;
+  --bg-3: #c7e4f8;
+  --text: rgba(255, 255, 255, 0.9);
+  --text-muted: rgba(255, 255, 255, 0.75);
+  --panel: rgba(26, 26, 26, 0.7);
+  --panel-soft: rgba(26, 26, 26, 0.12);
+  --card: rgba(15, 16, 20, 0.28);
+  --border: rgba(255, 255, 255, 0.12);
+  --accent: #00ffff;
+  --glow: rgba(0, 255, 255, 0.2);
+  --shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
+  --link: #8fb6d6;
+  --scroll-thumb: #e6f2f4;
+  --scroll-track: transparent;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -12,18 +27,36 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+[data-theme='light'] {
+  --bg-1: #b8bec4;
+  --bg-2: #aeb5bc;
+  --bg-3: #c7cdd3;
+  --text: #1b1c1f;
+  --text-muted: rgba(27, 28, 31, 0.75);
+  --panel: rgba(242, 244, 246, 0.8);
+  --panel-soft: rgba(238, 240, 242, 0.55);
+  --card: rgba(238, 240, 242, 0.7);
+  --border: rgba(27, 28, 31, 0.12);
+  --accent: #2d7e86;
+  --glow: rgba(45, 126, 134, 0.25);
+  --shadow: 0 8px 18px rgba(27, 28, 31, 0.15);
+  --link: #2f6a73;
+  --scroll-thumb: #90a9b3;
+  --scroll-track: transparent;
+}
+
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--link);
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #535bf2;
+  color: var(--accent);
 }
 
 html {
-  scrollbar-color: #e6f2f4 transparent;
+  scrollbar-color: var(--scroll-thumb) var(--scroll-track);
   scrollbar-width: thin;
 }
 
@@ -31,11 +64,13 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: linear-gradient(120deg, #2a2d32, #46505c, #c7e4f8);
+  color: var(--text);
+  background: linear-gradient(120deg, var(--bg-1), var(--bg-2), var(--bg-3));
   background-size: 200% 200%;
   animation: gradientFlow 18s ease infinite;
   position: relative;
   overflow-x: hidden;
+  transition: background 1.6s ease, color 1.6s ease;
 }
 
 body::before {
@@ -94,14 +129,14 @@ body::-webkit-scrollbar-track {
 
 html::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb {
-  background: #e6f2f4;
+  background: var(--scroll-thumb);
   border-radius: 999px;
   border: none;
 }
 
 h1 {
   font-size: 3.2em;
-  line-height: 1.1;
+  line-height: 1.3;
 }
 
 button {

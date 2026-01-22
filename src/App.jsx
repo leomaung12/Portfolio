@@ -10,6 +10,7 @@ import gmaillogo from './images/gmail.svg'
 import './App.css'
 
 function App() {
+  const [theme, setTheme] = useState('dark')
   const [displayText, setDisplayText] = useState('')
   const [index, setIndex] = useState(0)
   const [showName, setShowName] = useState(false)
@@ -19,6 +20,21 @@ function App() {
   const typingSpeed = 100
   const deleteSpeed = 50
   const pauseDelay = 3000
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem('theme')
+    if (storedTheme) {
+      setTheme(storedTheme)
+      return
+    }
+    const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches
+    setTheme(prefersDark ? 'dark' : 'light')
+  }, [])
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    localStorage.setItem('theme', theme)
+  }, [theme])
 
   useEffect(() => {
     const handleTyping = () => {
@@ -62,13 +78,20 @@ function App() {
           <Link to="/projects">Projects</Link>
           <Link to="/contact">Contact</Link>
         </nav>
+        <button
+          className="theme-toggle"
+          type="button"
+          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+        >
+          {theme === 'dark' ? 'Light' : 'Dark'}
+        </button>
       </header>
       <main>
         <Routes>
           <Route
             path="/"
             element={
-              <section className="page fade-in">
+              <section className="page fade-in home-section">
                 <div className="socials">
                   <a
                     href="https://linkedin.com/in/leotheinmaung"
@@ -107,12 +130,15 @@ function App() {
                     />
                   </a>
                 </div>
-                <h1>
+                <h1 className="wave-title">
                   {displayText}
                   {!isDeleting && <span className="cursor">|</span>}
                 </h1>
-                {showName && <h2 className="name">Leo</h2>}
-
+                <div className="name-slot">
+                  <h2 className={`name2 ${showName ? 'is-visible' : 'is-hidden'}`}>
+                    Leo
+                  </h2>
+                </div>
               </section>
             }
           />
